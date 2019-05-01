@@ -38,6 +38,9 @@ window.onload = () => {
     checkAndDisableLibraryBtn() && movieGrid.visibilityFilter === SELECTED
       ? catalogBtnDOMEle.click()
       : undefined;
+  })
+  .catch(error => {
+    console.error(error);
   });
 };
 
