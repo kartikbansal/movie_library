@@ -52,7 +52,7 @@ const renderGrid = () => {
       htmlStr += `
         <div class="movie">
           <div class="movie-media">
-            <img src=${DEFAULT_IMG} class="lazy movie-media-img" data-src="${poster}" />
+            <img src=${DEFAULT_IMG} class="lazy movie-media-img" alt="${title} Image" data-src="${poster}" />
             <div class="movie-overlay">
               <button class="movie-button btn" data-id="${id}">
                 ${!isSelected ? "ADD" : "REMOVE"}
