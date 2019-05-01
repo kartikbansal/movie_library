@@ -13,38 +13,46 @@
     </div>
   </header>
 
-  <main class="container">
+  <main class="grid">
 
-    <section class="filters">
-      <div class="filters-container">
-        <div class="action-btns">
-          <button class="btn library-btn">My Movie Library</button>
-          <button class="btn catalog-btn">Search and Add new Movies</button>
-          <div class="sort-box">
-            Sort By:
-            <select name="sort" class="sort-filter"></select>
+    <div class="container">
+      <section class="filters">
+        <div class="filters-container">
+          <div class="action-btns">
+            <button class="btn library-btn">My Movie Library</button>
+            <button class="btn catalog-btn">Search and Add new Movies</button>
+            <div class="sort-box">
+              Sort By:
+              <select name="sort" class="sort-filter"></select>
+            </div>
           </div>
+          <input type="text" placeholder="Search Movies..." class="search-box" />
         </div>
-        <input type="text" placeholder="Search Movies..." class="search-box" />
-      </div>
-      <div class="filters-loader">
-
-      </div>
-    </section>
-
-    <section class="movie-grid">
-      <div class="movie-grid-container"></div>
-      <div class="movie-grid-loader">
-        <div class="movie-grid-loader-box"></div>
-        <div class="movie-grid-loader-box"></div>
-        <div class="movie-grid-loader-box"></div>
-      </div>
-    </section>
+        <div class="filters-loader">
+          <div class="filters-loader-box"></div>
+        </div>
+      </section>
+  
+      <section class="movie-grid">
+        <div class="movie-grid-container"></div>
+        <div class="movie-grid-loader">
+          <div class="movie-grid-loader-box"></div>
+          <div class="movie-grid-loader-box"></div>
+          <div class="movie-grid-loader-box"></div>
+          <div class="movie-grid-loader-box"></div>
+          <div class="movie-grid-loader-box"></div>
+        </div>
+      </section>
+    </div>
 
   </main>
 
-  <footer>
+  <footer class="footer">
     <div class="container">
+      <p>
+        Created by
+        <a href="https://in.linkedin.com/in/kartik-bansal-28b984126" target="blank">Kartik Bansal</a>  
+      </p>
     </div>
   </footer>
 
