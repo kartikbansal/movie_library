@@ -47,24 +47,30 @@ window.onload = () => {
 const renderGrid = () => {
   let htmlStr = "";
   const movies = movieGrid.getVisibleMovies();
-  movies.forEach(({ id, title, year, poster, isSelected }) => {
-    htmlStr += `
-      <div class="movie">
-        <div class="movie-media">
-          <img src=${DEFAULT_IMG} class="lazy movie-media-img" data-src="${poster}" />
-          <div class="movie-overlay">
-            <button class="movie-button btn" data-id="${id}">
-              ${!isSelected ? "ADD" : "REMOVE"}
-            </button>
+  if (movies.length) {
+    movies.forEach(({ id, title, year, poster, isSelected }) => {
+      htmlStr += `
+        <div class="movie">
+          <div class="movie-media">
+            <img src=${DEFAULT_IMG} class="lazy movie-media-img" data-src="${poster}" />
+            <div class="movie-overlay">
+              <button class="movie-button btn" data-id="${id}">
+                ${!isSelected ? "ADD" : "REMOVE"}
+              </button>
+            </div>
+          </div>
+          <div class="movie-info">
+            <p class="movie-title" title="${title}">${title}</p>
+            <p class="movie-year">${year}</p>
           </div>
         </div>
-        <div class="movie-info">
-          <p class="movie-title" title="${title}">${title}</p>
-          <p class="movie-year">${year}</p>
-        </div>
-      </div>
-    `;
-  });
+      `;
+    });
+  } else {
+    htmlStr = `
+      <p class="info-msg">No Movies Found</p>
+    `
+  }
   movieGridContainerDOMEle.innerHTML = htmlStr;
   registerMovieBtnClickEvent();
 };
@@ -119,7 +125,7 @@ const registerEventsForFilterActions = () => {
       movieGrid.searchString = evt.target.value;
       renderGrid();
       movieGrid.loadMoviePosters();
-    }, 100)
+    }, 300)
   );
 };
 
