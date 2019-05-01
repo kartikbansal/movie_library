@@ -25,11 +25,14 @@ window.onload = () => {
   fetchMovies().then(movies => {
     movieGrid = new MovieGrid(movies);
     renderGrid();
+    // lazy load movie posters
     movieGrid.loadMoviePosters();
+    // show/hide dom elements on successful loading of movies
     showEle(filtersLoaderDOMEle, false);
-    showEle(filtersContainerDOMEle, true);
     showEle(movieGridLoaderDOMEle, false);
+    showEle(filtersContainerDOMEle, true);
     showEle(movieGridContainerDOMEle, true);
+    
     libraryBtnDOMEle = document.querySelector(".library-btn");
     catalogBtnDOMEle = document.querySelector(".catalog-btn");
     sortSelectDOMEle = document.querySelector(".sort-filter");
@@ -44,6 +47,9 @@ window.onload = () => {
   });
 };
 
+/**
+ * To render movie grid
+ */
 const renderGrid = () => {
   let htmlStr = "";
   const movies = movieGrid.getVisibleMovies();
@@ -75,6 +81,9 @@ const renderGrid = () => {
   registerMovieBtnClickEvent();
 };
 
+/**
+ * Registers click event handler for add or remove button on movie 
+ */
 const registerMovieBtnClickEvent = () => {
   const movieEles = [].slice.call(document.querySelectorAll(".movie"));
   movieEles.forEach(movie => {
@@ -83,8 +92,10 @@ const registerMovieBtnClickEvent = () => {
         const id = evt.target.getAttribute("data-id");
         const isNowSelected = movieGrid.toggleMovieSelection(id);
         if (movieGrid.visibilityFilter === ALL) {
+          // changes innerText of button if all items are being viewed
           evt.target.innerText = !isNowSelected ? "ADD" : "REMOVE";
         } else if (movieGrid.visibilityFilter === SELECTED) {
+          // remove the clicked item if selected items are viewed
           movieGridContainerDOMEle.removeChild(movie);
         }
         checkAndDisableLibraryBtn() && movieGrid.visibilityFilter === SELECTED
@@ -95,7 +106,11 @@ const registerMovieBtnClickEvent = () => {
   });
 };
 
+/**
+ * Register event handler for all filter actions
+ */
 const registerEventsForFilterActions = () => {
+  // Search and select movie button
   catalogBtnDOMEle.addEventListener("click", () => {
     if (movieGrid.visibilityFilter !== ALL) {
       movieGrid.visibilityFilter = ALL;
@@ -104,6 +119,7 @@ const registerEventsForFilterActions = () => {
     }
   });
 
+  // movie library button
   libraryBtnDOMEle.addEventListener("click", () => {
     if (movieGrid.visibilityFilter !== SELECTED) {
       movieGrid.visibilityFilter = SELECTED;
@@ -112,6 +128,7 @@ const registerEventsForFilterActions = () => {
     }
   });
 
+  // sort
   renderSortOptions();
   sortSelectDOMEle.addEventListener("change", evt => {
     movieGrid.sortBy = evt.target.value;
@@ -119,6 +136,7 @@ const registerEventsForFilterActions = () => {
     movieGrid.loadMoviePosters();
   });
 
+  // serach filter
   searchBoxDOMEle.addEventListener(
     "keyup",
     debounce(evt => {
@@ -141,6 +159,9 @@ const renderSortOptions = () => {
   sortSelectDOMEle.innerHTML = htmlStr;
 };
 
+/**
+ * Disable movie library button if no movie is selected
+ */
 const checkAndDisableLibraryBtn = () => {
   libraryBtnDOMEle.disabled = !movieGrid.getSelectedMovies().length
     ? true

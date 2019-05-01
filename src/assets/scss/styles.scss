@@ -153,11 +153,12 @@ body {
     .movie-info {
       font-size: 0.75rem;
 
-      .movie-title {
+      .movie-title, .movie-year {
         overflow: hidden;
         word-wrap: break-word;
         text-overflow: ellipsis;
         white-space: nowrap;
+        margin-top: 3px;
       }
     }
   }
